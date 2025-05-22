@@ -1,5 +1,5 @@
 from django.views.generic import ListView, CreateView, DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
 
 from core.models import Article, ContentImage
@@ -34,6 +34,12 @@ class ContentImageCreateView(CreateView):
 class ContentImageUpdateView(ContentImageCreateView):
     model = ContentImage
     pk_url_kwarg = 'image'
+
+    def get_success_url(self):
+        return reverse(
+            'image-list',
+            kwargs={'article': self.object.article}
+        )
 
     # override get/post to retrieve object (otherwise set to none)
 
