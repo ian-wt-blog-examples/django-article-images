@@ -1,5 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Articles</h1>
+<h1 class="mb-2">Articles</h1>
+
+{% if object_list %}
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Title</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for item in object_list %}
+  <tr>
+    <td>{{ item }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No articles. Add and modify articles in <a href="/admin/">admin.</a></p>
+{% endif %}
 {% endblock %}
