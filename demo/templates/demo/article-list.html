@@ -8,12 +8,14 @@
   <thead>
   <tr>
     <th>Title</th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
   {% for item in object_list %}
   <tr>
     <td>{{ item }}</td>
+    <td class="text-end"><a href="{% url 'create-image' article=item.id %}" class="btn btn-outline-primary btn-sm">Add Image</a></td>
   </tr>
   {% endfor %}
   </tbody>
