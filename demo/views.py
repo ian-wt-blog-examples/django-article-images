@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DeleteView
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 
@@ -69,4 +69,15 @@ class ContentImageListView(ListView):
         else:
             article = get_object_or_404(Article, pk=self.kwargs['article'])
         context['article'] = article
+        return context
+
+
+class ContentImageDeleteView(DeleteView):
+    template_name = 'demo/image-delete.html'
+    model = ContentImage
+    pk_url_kwarg = 'image'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['form_title'] = 'Delete Image'
         return context

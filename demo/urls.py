@@ -4,7 +4,8 @@ from .views import (
     ArticleListView,
     ContentImageCreateView,
     ContentImageUpdateView,
-    ContentImageListView
+    ContentImageListView,
+    ContentImageDeleteView,
 )
 
 urlpatterns = [
@@ -15,4 +16,6 @@ urlpatterns = [
          name='update-image'),
     path('<int:article>/images/', ContentImageListView.as_view(),
          name='image-list'),
+    path('delete-image/<int:image>/', ContentImageDeleteView.as_view(),
+         name='delete-image'),
 ]
