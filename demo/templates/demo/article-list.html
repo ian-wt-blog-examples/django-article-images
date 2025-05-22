@@ -8,14 +8,19 @@
   <thead>
   <tr>
     <th>Title</th>
-    <th></th>
+    <th class="text-end">Images</th>
   </tr>
   </thead>
   <tbody>
   {% for item in object_list %}
   <tr>
     <td>{{ item }}</td>
-    <td class="text-end"><a href="{% url 'create-image' article=item.id %}" class="btn btn-outline-primary btn-sm">Add Image</a></td>
+    <td>
+      <div class="d-flex flex-wrap gap-2 justify-content-end">
+        <a href="{% url 'image-list' article=item.id %}" class="btn btn-outline-primary btn-sm">View</a>
+        <a href="{% url 'create-image' article=item.id %}" class="btn btn-outline-success btn-sm">Add</a>
+      </div>
+    </td>
   </tr>
   {% endfor %}
   </tbody>
