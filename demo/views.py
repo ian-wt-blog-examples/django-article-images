@@ -1,5 +1,6 @@
 from django.views.generic import ListView, CreateView
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
 
 from core.models import Article, ContentImage
 from .forms import ContentImageForm
@@ -47,3 +48,25 @@ class ContentImageUpdateView(ContentImageCreateView):
         if form.is_valid():
             return self.form_valid(form)
         return self.form_invalid(form)
+
+
+class ContentImageListView(ListView):
+    template_name = 'demo/image-list.html'
+    model = ContentImage
+    ordering = ('-pk',)
+
+    def get_queryset(self):
+        return (super().get_queryset().
+                filter(article__pk=self.kwargs['article'])
+                .select_related('article'))
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        object_list = context.get('object_list')
+        if object_list:
+            article = object_list[0].article
+        else:
+            article = get_object_or_404(Article, pk=self.kwargs['article'])
+        context['article'] = article
+        return context

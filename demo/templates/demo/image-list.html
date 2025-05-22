@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex gap-2 justify-content-between align-items-start">
+  <h1 class="mb-2">Images</h1>
+  <a href="{% url 'article-list' %}" class="btn btn-primary btn-sm">Back</a>
+</div>
+
+{% if object_list %}
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>URL</th>
+    <th class="text-end">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for item in object_list %}
+  <tr>
+    <td>
+      <img src="{{ item.image.url }}" alt="Content image." class="img-thumbnail" style="width: 200px">
+    </td>
+    <td>{{ item.image.url }}</td>
+    <td>
+      <div class="d-flex gap-2 flex-wrap justify-content-end">
+        <a href="{% url 'update-image' image=item.pk %}" class="btn btn-outline-primary btn-sm">Update</a>
+        <a href="" class="btn btn-outline-danger btn-sm">Delete</a>
+      </div>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No images.</p>
+{% endif %}
+{% endblock %}
