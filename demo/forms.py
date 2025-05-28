@@ -25,6 +25,6 @@ class ContentImageForm(forms.ModelForm):
                 article = get_object_or_404(Article, pk=self.article_id)
                 self.instance.article = article
             else:
-                raise ImproperlyConfigured("Expected kwargs 'article_id' "
+                raise ImproperlyConfigured("Expected kwarg 'article_id' "
                                            "cannot be none for create view.")
         return cleaned_data
